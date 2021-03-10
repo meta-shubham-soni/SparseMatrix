@@ -4,57 +4,39 @@ public class Main{
     public static void main(String args[]) 
 	{ 
     	Scanner sc = new Scanner(System.in);
-    	System.out.println("Please enter row and col of 1st matrix");
-    	int r1 = sc.nextInt();
-    	int c1 = sc.nextInt();
-    	System.out.println("Please enter row and col of 2st matrix");
-    	int r2 = sc.nextInt();
-    	int c2 = sc.nextInt();
-    	SparseMatrix a = new SparseMatrix(r1, c1); 
-    	SparseMatrix b = new SparseMatrix(r2, c2); 
     	
-    	System.out.println("Please enter elements of 1st matrix");
-    	System.out.println("Please enter -1 to exit");
-
-    	while(true){
-    		int r = sc.nextInt();
-    		if(r == -1)
-    			break;
-    		else{
-    			int c = sc.nextInt();
-    			int val = sc.nextInt();
-    			a.insert(r, c, val);
-    		}
-    	}
-    	a.sortData();
+    	int[][] arr1 = {{5,0,3},{0,0,2},{0,1,0}};
     	
-    	System.out.println("Please enter elements of 2st matrix");
-    	System.out.println("Please enter -1 to exit");
-
-    	while(true){
-    		int r = sc.nextInt();
-    		if(r == -1)
-    			break;
-    		else{
-    			int c = sc.nextInt();
-    			int val = sc.nextInt();
-    			b.insert(r, c, val);
-    		}
-    	}
+    	int[][] arr2 = {{1,0,0},{0,2,0},{0,0,1}};
     	
-    	b.sortData();
-		
+    	SparseMatrix a = new SparseMatrix(arr1,3,3);
+    	SparseMatrix b = new SparseMatrix(arr2,3,3);
+    	
+    	int[][] transposeOfa = a.transposeMatrix();
+    	int[][] transposeOfb = b.transposeMatrix();
+    	int[][] addResult = a.addMatrix(b);
+    	int[][] mulResult = a.multiplyMatrix(b);
+    	
+    	System.out.println("Transpose Result (a)");
+    	printMatrix(transposeOfa,3,3);
+    	
+    	System.out.println("Transpose Result (b)");
+    	printMatrix(transposeOfb,3,3);
+    	
+    	System.out.println("Addition Result");
+    	printMatrix(addResult,3,3);
 
-		// Output result 
-		System.out.println("Addition: "); 
-		a.add(b); 
-		System.out.println("\nMultiplication: "); 
-		a.multiply(b); 
+    	System.out.println("Multiplication Result");
+    	printMatrix(mulResult,3,3);
 
-		SparseMatrix atranspose = a.transpose(); 
-		atranspose.print(); 
-		
-		System.out.println("\nis A symmetric: " + a.isSymmetric());
-		System.out.println("\nis B symmetric: " + b.isSymmetric());
 	}
+    
+    public static void printMatrix(int[][] matrix,int row,int col){
+    	for(int i=0;i<row;i++){
+    		for(int j=0;j<col;j++){
+    			System.out.print(matrix[i][j]+ " ");
+    		}
+    		System.out.println();
+    	}
+    }
 }
